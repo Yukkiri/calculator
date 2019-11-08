@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="white">#FFFFFF</color>
+    <color name="background">#FFDBED</color>
+    <color name="bEnd">#FFDBED</color>
+    <color name="bStart">#FFADD5</color>
+    <color name="butEnd">#FF6ECF</color>
+    <color name="butStart">#FF37DD</color>
+    <color name="butCenter">#E8E8E8</color>
+    <color name="butStroke">#661658</color>
+    <color name="tEnd">#346145</color>
+    <color name="tStart">#346145</color>
+    <color name="tCenter">#82987b</color>
+    <color name="tStroke">#292929</color>
+    <color name="engStart">#D46AC6</color>
+    <color name="engCenter">#E6AAD8</color>
+    <color name="engEnd">#FF4DFF</color>
+    <color name="engStroke">#661658</color>
+    <color name="techEnd">#FFA8A8</color>
+    <color name="techStart">#BD8377</color>
+    <color name="techCenter">#D6AABA</color>
+    <color name="techStroke">#661658</color>
+    <color name="operStart">#2E9999</color>
+    <color name="operEnd">#47FFF9</color>
+    <color name="operCenter">#5EE6CA</color>
+    <color name="operStroke">#878787</color>
+</resources>
