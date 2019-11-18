@@ -37,7 +37,7 @@
     <string name="cube_root"><sup><small>3</small></sup>\u221ax</string>
     <string name="num_root"><sup><small>y</small></sup>\u221Ax</string>
     <string name="ln">ln</string>
-    <string name="log">log<sub><small>10</small></sub></string>
+    <string name="log_ten">log<sub><small>10</small></sub></string>
     <string name="fact">x!</string>
     <string name="sin">sin</string>
     <string name="cos">cos</string>
@@ -50,4 +50,15 @@
     <string name="tanh">tanh</string>
     <string name="pi">π</string>
     <string name="rand">Rand</string>
+    <string name="y_degree">y<sup><small>x</small></sup></string>
+    <string name="two_degree">2<sup><small>x</small></sup></string>
+    <string name="log_y">log<sub><small>y</small></sub></string>
+    <string name="log_two">log<sub><small>2</small></sub></string>
+    <string name="sinm">sin<sup><small>-1</small></sup></string>
+    <string name="cosm">cos<sup><small>-1</small></sup></string>
+    <string name="tanm">tan<sup><small>-1</small></sup></string>
+    <string name="sinhm">sinh<sup><small>-1</small></sup></string>
+    <string name="coshm">cosh<sup><small>-1</small></sup></string>
+    <string name="tanhm">tanh<sup><small>-1</small></sup></string>
+    <string name="deg">Deg</string>
 </resources>

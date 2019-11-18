@@ -303,6 +303,27 @@
         app:layout_constraintVertical_bias="0.46" />
 
     <Button
+        android:id="@+id/y_degree"
+        android:layout_width="@dimen/number_land_width"
+        android:layout_height="@dimen/number_land_height"
+        android:background="@drawable/button_gradient_eng"
+        android:shadowColor="#911670"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="@string/y_degree"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/e_degree"
+        app:layout_constraintEnd_toEndOf="@+id/e_degree"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/e_degree"
+        app:layout_constraintTop_toTopOf="@+id/e_degree"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
         android:id="@+id/ten_degree"
         android:layout_width="@dimen/number_land_width"
         android:layout_height="@dimen/number_land_height"
@@ -321,6 +342,27 @@
         app:layout_constraintStart_toEndOf="@+id/e_degree"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.46" />
+
+    <Button
+        android:id="@+id/two_degree"
+        android:layout_width="@dimen/number_land_width"
+        android:layout_height="@dimen/number_land_height"
+        android:background="@drawable/button_gradient_eng"
+        android:shadowColor="#911670"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="@string/two_degree"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/ten_degree"
+        app:layout_constraintEnd_toEndOf="@+id/ten_degree"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/ten_degree"
+        app:layout_constraintTop_toTopOf="@+id/ten_degree"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button1"
@@ -492,14 +534,14 @@
         android:textSize="20sp"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/log"
+        app:layout_constraintEnd_toStartOf="@+id/log_ten"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/num_root"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.6" />
 
     <Button
-        android:id="@+id/log"
+        android:id="@+id/log_y"
         android:layout_width="@dimen/number_land_width"
         android:layout_height="@dimen/number_land_height"
         android:background="@drawable/button_gradient_eng"
@@ -507,7 +549,28 @@
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="5"
-        android:text="@string/log"
+        android:text="@string/log_y"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/ln"
+        app:layout_constraintEnd_toEndOf="@+id/ln"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/ln"
+        app:layout_constraintTop_toTopOf="@+id/ln"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/log_ten"
+        android:layout_width="@dimen/number_land_width"
+        android:layout_height="@dimen/number_land_height"
+        android:background="@drawable/button_gradient_eng"
+        android:shadowColor="#911670"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="@string/log_ten"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textAllCaps="false"
@@ -517,6 +580,27 @@
         app:layout_constraintStart_toEndOf="@+id/ln"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.6" />
+
+    <Button
+        android:id="@+id/log_two"
+        android:layout_width="@dimen/number_land_width"
+        android:layout_height="@dimen/number_land_height"
+        android:background="@drawable/button_gradient_eng"
+        android:shadowColor="#911670"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="@string/log_two"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/log_ten"
+        app:layout_constraintEnd_toEndOf="@+id/log_ten"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/log_ten"
+        app:layout_constraintTop_toTopOf="@+id/log_ten"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button4"
@@ -533,7 +617,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button5"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/log"
+        app:layout_constraintStart_toEndOf="@+id/log_ten"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.6" />
 
@@ -635,6 +719,26 @@
         app:layout_constraintVertical_bias="0.74" />
 
     <Button
+        android:id="@+id/sinm"
+        android:layout_width="@dimen/number_land_width"
+        android:layout_height="@dimen/number_land_height"
+        android:background="@drawable/button_gradient_eng"
+        android:shadowColor="#911670"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="@string/sinm"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/sin"
+        app:layout_constraintStart_toStartOf="@+id/sin"
+        app:layout_constraintEnd_toEndOf="@+id/sin"
+        app:layout_constraintTop_toTopOf="@+id/sin"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
         android:id="@+id/cos"
         android:layout_width="@dimen/number_land_width"
         android:layout_height="@dimen/number_land_height"
@@ -655,6 +759,26 @@
         app:layout_constraintVertical_bias="0.74" />
 
     <Button
+        android:id="@+id/cosm"
+        android:layout_width="@dimen/number_land_width"
+        android:layout_height="@dimen/number_land_height"
+        android:background="@drawable/button_gradient_eng"
+        android:shadowColor="#911670"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="@string/cosm"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/cos"
+        app:layout_constraintStart_toStartOf="@+id/cos"
+        app:layout_constraintEnd_toEndOf="@+id/cos"
+        app:layout_constraintTop_toTopOf="@+id/cos"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
         android:id="@+id/tan"
         android:layout_width="@dimen/number_land_width"
         android:layout_height="@dimen/number_land_height"
@@ -673,6 +797,26 @@
         app:layout_constraintStart_toEndOf="@+id/cos"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.74" />
+
+    <Button
+        android:id="@+id/tanm"
+        android:layout_width="@dimen/number_land_width"
+        android:layout_height="@dimen/number_land_height"
+        android:background="@drawable/button_gradient_eng"
+        android:shadowColor="#911670"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="@string/tanm"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/tan"
+        app:layout_constraintStart_toStartOf="@+id/tan"
+        app:layout_constraintEnd_toEndOf="@+id/tan"
+        app:layout_constraintTop_toTopOf="@+id/tan"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/e"
@@ -830,6 +974,26 @@
         app:layout_constraintVertical_bias="0.88" />
 
     <Button
+        android:id="@+id/sinhm"
+        android:layout_width="@dimen/number_land_width"
+        android:layout_height="@dimen/number_land_height"
+        android:background="@drawable/button_gradient_eng"
+        android:shadowColor="#911670"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="@string/sinhm"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/sinh"
+        app:layout_constraintStart_toStartOf="@+id/sinh"
+        app:layout_constraintEnd_toEndOf="@+id/sinh"
+        app:layout_constraintTop_toTopOf="@+id/sinh"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
         android:id="@+id/cosh"
         android:layout_width="@dimen/number_land_width"
         android:layout_height="@dimen/number_land_height"
@@ -850,6 +1014,26 @@
         app:layout_constraintVertical_bias="0.88" />
 
     <Button
+        android:id="@+id/coshm"
+        android:layout_width="@dimen/number_land_width"
+        android:layout_height="@dimen/number_land_height"
+        android:background="@drawable/button_gradient_eng"
+        android:shadowColor="#911670"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="@string/coshm"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/cosh"
+        app:layout_constraintStart_toStartOf="@+id/cosh"
+        app:layout_constraintEnd_toEndOf="@+id/cosh"
+        app:layout_constraintTop_toTopOf="@+id/cosh"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
         android:id="@+id/tanh"
         android:layout_width="@dimen/number_land_width"
         android:layout_height="@dimen/number_land_height"
@@ -868,6 +1052,26 @@
         app:layout_constraintStart_toEndOf="@+id/cosh"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.88" />
+
+    <Button
+        android:id="@+id/tanhm"
+        android:layout_width="@dimen/number_land_width"
+        android:layout_height="@dimen/number_land_height"
+        android:background="@drawable/button_gradient_eng"
+        android:shadowColor="#911670"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:text="@string/tanhm"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/tanh"
+        app:layout_constraintStart_toStartOf="@+id/tanh"
+        app:layout_constraintEnd_toEndOf="@+id/tanh"
+        app:layout_constraintTop_toTopOf="@+id/tanh"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/pi"
@@ -984,10 +1188,12 @@
         android:layout_height="@dimen/text_land_height"
         android:background="@drawable/text_view_gradient"
         android:gravity="center_vertical|end"
-        android:maxLength="15"
-        android:text="234235"
+        android:maxLength="30"
+        android:text="@string/zero"
         android:paddingRight="3dp"
         android:textSize="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -1038,7 +1244,6 @@
         android:gravity="top|right"
         android:paddingTop="3dp"
         android:paddingRight="10dp"
-        android:text="2345678"
         app:layout_constraintBottom_toBottomOf="@+id/computation"
         app:layout_constraintEnd_toEndOf="@+id/computation"
         app:layout_constraintHorizontal_bias="0.95"

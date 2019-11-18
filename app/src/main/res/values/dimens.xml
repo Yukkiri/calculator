@@ -12,5 +12,5 @@
     <dimen name="text_height">80dp</dimen>
     <dimen name="text_width">365dp</dimen>
     <dimen name="text_land_height">60dp</dimen>
-    <dimen name="text_land_width">700dp</dimen>
+    <dimen name="text_land_width">650dp</dimen>
 </resources>
