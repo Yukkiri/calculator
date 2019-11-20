@@ -27,4 +27,5 @@
     <color name="operEnd">#47FFF9</color>
     <color name="operCenter">#5EE6CA</color>
     <color name="operStroke">#878787</color>
+    <color name="shadow">#911670</color>
 </resources>

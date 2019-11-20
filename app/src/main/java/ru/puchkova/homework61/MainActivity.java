@@ -4,28 +4,30 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import java.lang.Math;
 
-import static java.lang.String.valueOf;
-
 
 public class MainActivity extends AppCompatActivity {
+    private static final String LOG_TAG = "logs";
     private static final String radS = "Rad";
     private static final String degS = "Deg";
     private static final String empty = "";
-    private static final int one = 1;
     private static final int zero = 0;
     private static final Double test = 111111111111111111111111111111111D;
     private static final int degreeInt = 1;
     private static final int numRootInt = 2;
     private static final int yDegreeInt = 3;
     private static final int logYInt = 4;
+    private boolean flagFirst = false;
 
     ComputationClass com = new ComputationClass();
+    DoubleToString doub = new DoubleToString();
 
     private TextView computation;
     private TextView calc;
@@ -101,9 +103,8 @@ public class MainActivity extends AppCompatActivity {
     private Double calculationDouble;
 
 
-
-    private Double [] memory = {0D};
-    Double [] number = {test};
+    private Double[] memory = {0D};
+    Double[] number = {test};
 
 
     @Override
@@ -116,7 +117,27 @@ public class MainActivity extends AppCompatActivity {
         init();
     }
 
-    private void init(){
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        computationString = computation.getText().toString();
+        calculationString = calc.getText().toString();
+        outState.putString("comp", computationString);
+        outState.putString("calcul", calculationString);
+        Log.d(LOG_TAG, "onSaveInstanceState");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        calculationString = savedInstanceState.getString("calcul");
+        computationString = savedInstanceState.getString("comp");
+        Log.d(LOG_TAG, "onRestoreInstanceState");
+        computation.setText(computationString);
+        calc.setText(calculationString);
+    }
+
+    private void init() {
         computation = findViewById(R.id.computation);
         calc = findViewById(R.id.calc);
         button0 = findViewById(R.id.button0);
@@ -183,15 +204,10 @@ public class MainActivity extends AppCompatActivity {
         log_ten = findViewById(R.id.log_ten);
         fact = findViewById(R.id.fact);
 
-
-        Typeface typeFace=Typeface.createFromAsset(getAssets(),"fonts/calc.ttf");
-        computation.setTypeface(typeFace);
-        calc.setTypeface(typeFace);
-
         setOcl();
     }
 
-    private void setOcl(){
+    private void setOcl() {
         button0.setOnClickListener(numOnClickListener);
         button1.setOnClickListener(numOnClickListener);
         button2.setOnClickListener(numOnClickListener);
@@ -242,22 +258,24 @@ public class MainActivity extends AppCompatActivity {
 
             square.setOnClickListener(degreeOnClickListener);
             cube.setOnClickListener(degreeOnClickListener);
-            degree.setOnClickListener(logsOnClickListener);
+            ;
             sqr_root.setOnClickListener(degreeOnClickListener);
             cube_root.setOnClickListener(degreeOnClickListener);
-            num_root.setOnClickListener(logsOnClickListener);
             fraction.setOnClickListener(degreeOnClickListener);
-            y_degree.setOnClickListener(logsOnClickListener);
             two_degree.setOnClickListener(degreeOnClickListener);
-            log_y.setOnClickListener(logsOnClickListener);
             log_two.setOnClickListener(degreeOnClickListener);
             e_degree.setOnClickListener(degreeOnClickListener);
             ten_degree.setOnClickListener(degreeOnClickListener);
             ln.setOnClickListener(degreeOnClickListener);
             log_ten.setOnClickListener(degreeOnClickListener);
 
+            degree.setOnTouchListener(logsOnTouchListener);
+            y_degree.setOnTouchListener(logsOnTouchListener);
+            num_root.setOnTouchListener(logsOnTouchListener);
+            log_y.setOnTouchListener(logsOnTouchListener);
+
             fact.setOnClickListener(factOnClickListener);
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             //хз чо тут писать
         }
     }
@@ -265,7 +283,11 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener numOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch(v.getId()){
+            if (flagFirst) {
+                computation.setText(empty);
+            }
+            flagFirst = false;
+            switch (v.getId()) {
                 case R.id.button1:
                     sNumber = "1";
                     break;
@@ -294,7 +316,7 @@ public class MainActivity extends AppCompatActivity {
                     sNumber = "9";
                     break;
                 default:
-                sNumber = "0";
+                    sNumber = "0";
             }
             computationString = computation.getText().toString();
             computationString = com.numbers(sNumber, computationString);
@@ -306,8 +328,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             computationString = computation.getText().toString();
+            try {
+                logsOff();
+                number[0] = test;
+            } catch (NullPointerException e) {
+                //aaaaaaaa
+            }
 
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.opposite:
                     computationString = com.getOpposite(computationString);
                     break;
@@ -325,18 +353,19 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener equalOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            int option;
-            try{
+            int option = 0;
+            try {
                 option = calculationLogs();
-            } catch (NullPointerException e){
-                option = 0;
+            } catch (NullPointerException e) {
+                //aaaaaaaa
             }
+
             computationString = computation.getText().toString();
-            calculationString = calc.getText().toString();
-            if(option != 0){
+            if (option != 0) {
                 calculationDouble = number[0];
-                computationString = com.logs(calculationDouble, calculationString, option);
+                computationString = com.logs(calculationDouble, computationString, option);
                 number[0] = test;
+                logsOff();
             } else {
                 computationString = com.equal(computationString);
             }
@@ -348,7 +377,15 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener operOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            int option = calculationLogs();
+            computationString = computation.getText().toString();
+            calculationString = calc.getText().toString();
+            if (option != 0) {
+                calculationDouble = number[0];
+                computationString = com.logs(calculationDouble, computationString, option);
+                number[0] = test;
+            }
+            switch (v.getId()) {
                 case R.id.division:
                     sNumber = "/";
                     break;
@@ -361,18 +398,20 @@ public class MainActivity extends AppCompatActivity {
                 default:
                     sNumber = "+";
             }
-            calculationString = calc.getText().toString();
-            computationString = computation.getText().toString();
+            number[0] = test;
             calculationString = com.setText(sNumber, calculationString, computationString);
             computation.setText(empty);
             calc.setText(calculationString);
+            logsOff();
         }
     };
 
     View.OnClickListener bracketsOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            logsOff();
+            number[0] = test;
+            switch (v.getId()) {
                 case R.id.bracket_l:
                     sNumber = "(";
                     break;
@@ -393,6 +432,8 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener clearOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            logsOff();
+            number[0] = test;
             computation.setText(empty);
             calc.setText(empty);
             com.clear();
@@ -404,23 +445,26 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             Double temp;
             Double add;
-            switch (v.getId()){
+            computationString = computation.getText().toString();
+            switch (v.getId()) {
                 case R.id.mc:
                     memory[0] = 0D;
                     break;
                 case R.id.mr:
-                    computationString = valueOf(memory[0]);
+                    computationString = doub.value(memory[0]);
                     computation.setText(computationString);
                     break;
                 case R.id.m_m:
+                    computationString = com.replaceError(computationString);
                     temp = memory[0];
-                    add = Double.parseDouble(computation.getText().toString());
+                    add = Double.parseDouble(computationString);
                     temp = temp - add;
                     memory[0] = temp;
                     break;
                 case R.id.m_p:
                     temp = memory[0];
-                    add = Double.parseDouble(computation.getText().toString());
+                    computationString = com.replaceError(computationString);
+                    add = Double.parseDouble(computationString);
                     temp = temp + add;
                     memory[0] = temp;
                     break;
@@ -431,7 +475,9 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener secondOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(sin.getVisibility() == View.VISIBLE){
+            logsOff();
+            number[0] = test;
+            if (sin.getVisibility() == View.VISIBLE) {
                 sin.setVisibility(View.INVISIBLE);
                 cos.setVisibility(View.INVISIBLE);
                 tan.setVisibility(View.INVISIBLE);
@@ -482,62 +528,66 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener trigOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            logsOff();
+            number[0] = test;
             computationString = computation.getText().toString();
-            computationString = com.replaceError(computationString);
-            calculationDouble = Double.parseDouble(computationString);
-            if(!rad.isPressed()){
-                calculationDouble = Math.toRadians(calculationDouble);
-            }
-            switch (v.getId()){
+            boolean flag = rad.isPressed();
+            int option = 0;
+
+            switch (v.getId()) {
                 case R.id.sin:
-                    calculationDouble = Math.sin(calculationDouble);
+                    option = 0;
                     break;
                 case R.id.cos:
-                    calculationDouble = Math.cos(calculationDouble);
+                    option = 1;
                     break;
                 case R.id.tan:
-                    calculationDouble = Math.tan(calculationDouble);
+                    option = 2;
                     break;
                 case R.id.sinh:
-                    calculationDouble = Math.sinh(calculationDouble);
+                    option = 3;
                     break;
                 case R.id.cosh:
-                    calculationDouble = Math.cosh(calculationDouble);
+                    option = 4;
                     break;
                 case R.id.tanh:
-                    calculationDouble = Math.tanh(calculationDouble);
+                    option = 5;
                     break;
                 case R.id.sinm:
-                    calculationDouble = one/Math.sin(calculationDouble);
+                    option = 6;
                     break;
                 case R.id.cosm:
-                    calculationDouble = one/Math.cos(calculationDouble);
+                    option = 7;
                     break;
                 case R.id.tanm:
-                    calculationDouble = one/Math.tan(calculationDouble);
+                    option = 8;
                     break;
                 case R.id.sinhm:
-                    calculationDouble = one/Math.sinh(calculationDouble);
+                    option = 9;
                     break;
                 case R.id.coshm:
-                    calculationDouble = one/Math.cosh(calculationDouble);
+                    option = 10;
                     break;
                 case R.id.tanhm:
-                    calculationDouble = one/Math.tanh(calculationDouble);
+                    option = 11;
                     break;
             }
-            computation.setText(valueOf(calculationDouble));
+            computationString = com.trigonometry(computationString, option, flag);
+            computation.setText(computationString);
         }
     };
 
     View.OnClickListener radOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(rad.isPressed()){
+            logsOff();
+            number[0] = test;
+            if (rad.isPressed()) {
                 rad.setText(radS);
                 rad.setPressed(false);
-            } else{
+            } else {
                 rad.setText(degS);
+                rad.setPressed(true);
             }
         }
     };
@@ -545,21 +595,21 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener piOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            computation.setText(valueOf(Math.PI));
+            computation.setText(doub.value(Math.PI));
         }
     };
 
     View.OnClickListener eOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            computation.setText(valueOf(Math.E));
+            computation.setText(doub.value(Math.E));
         }
     };
 
     View.OnClickListener randOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            computation.setText(valueOf(Math.random()));
+            computation.setText(doub.value(Math.random()));
         }
     };
 
@@ -568,8 +618,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             int operation = 0;
             computationString = computation.getText().toString();
-            calculationString = calc.toString();
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.square:
                     operation = 0;
                     break;
@@ -604,16 +653,59 @@ public class MainActivity extends AppCompatActivity {
                     operation = 10;
                     break;
             }
-            computationString = com.degrees(computationString, calculationString, operation);
+            computationString = com.degrees(computationString, operation);
+            computation.setText(computationString);
+        }
+    };
+
+
+    View.OnClickListener factOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            computationString = computation.getText().toString();
+            computationString = com.factorial(computationString);
             computation.setText(com.checkError(computationString));
         }
     };
 
-    View.OnClickListener logsOnClickListener = new View.OnClickListener() {
+    private int calculationLogs() {
+        try {
+            if (degree.isPressed()) {
+                return degreeInt;
+            } else if (num_root.isPressed()) {
+                return numRootInt;
+            } else if (y_degree.isPressed()) {
+                return yDegreeInt;
+            } else if (log_y.isPressed()) {
+                return logYInt;
+            } else {
+                return zero;
+            }
+        } catch (NullPointerException e) {
+            return zero;
+        }
+    }
+
+    private void logsOff() {
+        try {
+            degree.setPressed(false);
+            num_root.setPressed(false);
+            y_degree.setPressed(false);
+            log_y.setPressed(false);
+        } catch (NullPointerException e) {
+            //aaaaa
+        }
+    }
+
+    View.OnTouchListener logsOnTouchListener = new View.OnTouchListener() {
         @Override
-        public void onClick(View v) {
+        public boolean onTouch(View v, MotionEvent event) {
             computationString = computation.getText().toString();
             calculationDouble = Double.parseDouble(computationString);
+            if (event.getAction() == MotionEvent.ACTION_DOWN) return true;
+
+            if (event.getAction() != MotionEvent.ACTION_UP) return false;
+
             logsOff();
             switch (v.getId()) {
                 case R.id.degree://........
@@ -630,35 +722,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
             number[0] = calculationDouble;
+            flagFirst = true;
+            return true;
         }
     };
-
-    View.OnClickListener factOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            computationString = computation.getText().toString();
-            computationString = com.factorial(computationString);
-            computation.setText(com.checkError(computationString));
-        }
-    };
-
-    private int calculationLogs(){
-        if(degree.isPressed()){
-            return degreeInt;
-        } else if (num_root.isPressed()){
-            return numRootInt;
-        } else if (y_degree.isPressed()){
-            return yDegreeInt;
-        } else if (log_y.isPressed()){
-            return logYInt;
-        }
-        return zero;
-    }
-
-    private void logsOff(){
-        degree.setPressed(false);
-        num_root.setPressed(false);
-        y_degree.setPressed(false);
-        log_y.setPressed(false);
-    }
 }
